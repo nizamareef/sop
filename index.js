@@ -11,17 +11,15 @@ app.use(cors());
   
 
 
-mongoose.connect(process.env.MONGODB_URI, {
+try{mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  ssl: true,
   })
-  .then(() => {
-    console.log("Connected to MongoDB");
-   
-  })
-  .catch((error) => {
+    console.log("Connected to MongoDB");}
+  catch {
     console.error("Error connecting to MongoDB:", error);
-  });
+  };
 
 app.use('/api', require("./Routes/form"));
 app.listen(port, () => {
